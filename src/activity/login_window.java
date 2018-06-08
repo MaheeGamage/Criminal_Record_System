@@ -82,7 +82,10 @@ public class login_window {
 					String sql = "SELECT * FROM loginUser WHERE username ='"+ txtUsername.getText() + "' AND password = '"+ txtPassword.getText().toString() +"'";
 					ResultSet rs= stmt.executeQuery(sql);
 					if(rs.next()) {
+						frame.dispose();
 						JOptionPane.showMessageDialog(null, "Login Successfully....");
+						Main_window main = new Main_window();
+						main.NewScreen();
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Login Failed");
