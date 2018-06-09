@@ -114,13 +114,12 @@ public class Register_Criminal {
 
 		            preparedStatement = con.prepareStatement("SELECT * FROM criminal_record WHERE NIC ='"+ txtNIC.getText() +"' ");
 		            resultSet = preparedStatement.executeQuery();
-//		            writeResultSet(resultSet);
 					
 					if(resultSet.next()) {
 						frame.dispose();
 						JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
-						Main_window main = new Main_window();
-						main.NewScreen();
+//						Main_window main = new Main_window();
+//						main.NewScreen();
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Record Insertion failed");
