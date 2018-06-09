@@ -7,7 +7,9 @@ import java.awt.Event.*;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
+import javax.swing.JLabel;
 
 public class Main_window {
 
@@ -41,7 +43,7 @@ public class Main_window {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 667, 444);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -53,6 +55,13 @@ public class Main_window {
 		
 		JMenuItem mnRegister = new JMenuItem("Register");
 		mnFiles.add(mnRegister);
+		
+		mnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Register_Criminal main = new Register_Criminal();
+				main.NewScreen();
+			}
+		});
 		
 		JMenuItem mnExit = new JMenuItem("Exit");
 		mnFiles.add(mnExit);
