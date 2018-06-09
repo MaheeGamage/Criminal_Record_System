@@ -81,6 +81,7 @@ public class login_window {
 					Statement stmt = con.createStatement();
 					String sql = "SELECT * FROM loginUser WHERE username ='"+ txtUsername.getText() + "' AND password = '"+ txtPassword.getText().toString() +"'";
 					ResultSet rs= stmt.executeQuery(sql);
+					System.out.println(rs);
 					if(rs.next()) {
 						frame.dispose();
 						JOptionPane.showMessageDialog(null, "Login Successfully....");

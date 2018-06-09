@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.Event.*;
 import javax.swing.JFrame;
@@ -24,7 +25,7 @@ public class Main_window {
 	private JFrame frame;
 	private JTextField txtSearch;
 	
-	private String attr;
+	private String attr = "NIC";
 
 	/**
 	 * Launch the application.
@@ -105,11 +106,14 @@ public class Main_window {
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/criminal_records","root","");
 					Statement stmt = con.createStatement();
 					
-					String sql = "SELECT * FROM loginUser WHERE '"+ attr +"' = '"+ txtSearch.getText() + "'";
+					String sql = "SELECT * FROM `criminal_record` WHERE '"+ attr +"' = '"+ btnSearch.getText() +"'";
 					
 					ResultSet rs= stmt.executeQuery(sql);
 					
+					writeResultSet(rs);
+					
 					if(rs.next()) {
+						rs.first();
 						System.out.println(rs);
 					}
 					else {
@@ -118,9 +122,9 @@ public class Main_window {
 					con.close();
 						
 				} 
-				catch(Exception e) 
+				catch(Exception err) 
 				{
-					System.out.print(e);
+					System.out.print(err);
 				}
 			}
 		});
@@ -155,4 +159,20 @@ public class Main_window {
 		mnExit.addActionListener(new exitaction());
 		
 	}
+	
+	private void writeResultSet(ResultSet resultSet) throws SQLException {
+        // ResultSet is initially before the first data set
+        while (resultSet.next()) {
+            // It is possible to get the columns via name
+            // also possible to get the columns via the column number
+            // which starts at 1
+            // e.g. resultSet.getSTring(2);
+            String nic = resultSet.getString("NIC");
+            String fullname = resultSet.getString("Fullname");
+            String address = resultSet.getString("Address");
+            System.out.println("NIC: " + nic);
+            System.out.println("Full Name: " + fullname);
+            System.out.println("Address: " + address);
+        }
+    }
 }
